@@ -1,0 +1,574 @@
+
+/* ==========================================
+   GARAGEM Z — GARAGE.CSS
+   PRIVATE SUPERCAR SHOWROOM
+   ========================================== */
+
+/* PÁGINA PRINCIPAL */
+
+.my-garage {
+  position: relative;
+  isolation: isolate;
+  min-height: 70vh;
+  padding: 75px 0 110px;
+  animation: fadeUp 650ms ease both;
+}
+
+.my-garage::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -70px;
+  right: -12%;
+  width: min(650px, 90%);
+  height: 420px;
+  background: radial-gradient(
+    ellipse,
+    rgba(237, 49, 71, 0.105),
+    transparent 70%
+  );
+  filter: blur(35px);
+  pointer-events: none;
+}
+
+/* ==========================================
+   TÍTULO DA GARAGEM
+   ========================================== */
+
+.garage-heading {
+  position: relative;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+
+.garage-heading .section-label {
+  display: inline-block;
+  margin-bottom: 14px;
+}
+
+.garage-heading h2 {
+  max-width: 850px;
+  margin: 0 0 18px;
+  font-size: clamp(38px, 5.5vw, 72px);
+  font-weight: 950;
+  letter-spacing: -0.055em;
+  line-height: 1.05;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.garage-heading h2::after {
+  content: ".";
+  color: var(--accent);
+}
+
+.garage-heading p {
+  max-width: 640px;
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+/* ==========================================
+   CONFIGURAÇÕES DA GARAGEM
+   ========================================== */
+
+.garage-settings {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+
+  margin: 36px 0 17px;
+  padding: 32px;
+
+  background: linear-gradient(
+    130deg,
+    #1d1e27 0%,
+    #14151c 65%,
+    #111218 100%
+  );
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.garage-settings::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 3px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--accent),
+    transparent
+  );
+}
+
+.garage-settings label {
+  display: block;
+  margin-bottom: 12px;
+  color: #bfc0cc;
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.45px;
+}
+
+.garage-settings select {
+  min-width: 210px;
+  min-height: 49px;
+  padding: 12px 16px;
+
+  color: #fff;
+  background: #272831;
+  border: 1px solid #41424e;
+  border-radius: 10px;
+
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-normal);
+}
+
+.garage-settings select:hover {
+  border-color: #666774;
+}
+
+.garage-settings select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.garage-settings select option {
+  background: #20212a;
+  color: #fff;
+}
+
+/* ==========================================
+   INDICADORES DE OCUPAÇÃO
+   ========================================== */
+
+.garage-indicators {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.garage-indicators > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+
+  min-width: 140px;
+  padding: 4px 8px;
+}
+
+.garage-indicators > div + div {
+  padding-left: 30px;
+  border-left: 1px solid var(--border);
+}
+
+.garage-indicators strong {
+  color: var(--accent);
+  font-size: clamp(32px, 3.5vw, 45px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+}
+
+.garage-indicators span {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ==========================================
+   BARRA DE PROGRESSO
+   ========================================== */
+
+.garage-progress {
+  position: relative;
+  width: 100%;
+  height: 9px;
+  margin-bottom: 39px;
+
+  background: #242530;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.garage-progress > div {
+  height: 100%;
+  border-radius: inherit;
+
+  background: linear-gradient(
+    90deg,
+    #a91c33,
+    var(--accent),
+    #ff7180
+  );
+
+  box-shadow: 0 0 15px var(--accent-glow);
+  transition: width 450ms ease;
+}
+
+/* ==========================================
+   GRID DE CARROS DA GARAGEM
+   ========================================== */
+
+.garage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 26px;
+}
+
+/* ==========================================
+   CARD DA GARAGEM
+   ========================================== */
+
+.garage-car {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+
+  background: linear-gradient(
+    155deg,
+    #1c1d25,
+    #13141b 75%
+  );
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+
+  transition:
+    transform 350ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 300ms ease,
+    box-shadow 350ms ease;
+}
+
+.garage-car:hover {
+  transform: translateY(-8px);
+  border-color: var(--border-hover);
+  box-shadow:
+    var(--shadow-hover),
+    0 0 30px rgba(237, 49, 71, 0.07);
+}
+
+/* FOTOGRAFIA */
+
+.garage-car-photo {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  background: #24252e;
+  overflow: hidden;
+
+  font-size: 54px;
+}
+
+.garage-car-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.25),
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+.garage-car-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition:
+    transform 650ms ease,
+    filter 350ms ease;
+}
+
+.garage-car:hover .garage-car-photo img {
+  transform: scale(1.07);
+  filter: brightness(1.06) saturate(1.06);
+}
+
+/* ==========================================
+   INFORMAÇÕES DO CARRO
+   ========================================== */
+
+.garage-car-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 12px;
+  padding: 25px;
+}
+
+.garage-car-info > span {
+  display: inline-block;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
+}
+
+.garage-car-info h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: clamp(20px, 2vw, 25px);
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+.garage-car-info p {
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.garage-car-info a {
+  align-self: flex-start;
+  color: #c0c7ff;
+  font-size: 11px;
+  font-weight: 650;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 4px;
+  transition:
+    color 200ms ease,
+    text-decoration-color 200ms ease;
+}
+
+.garage-car-info a:hover {
+  color: white;
+  text-decoration-color: currentColor;
+}
+
+/* ==========================================
+   BOTÃO REMOVER
+   ========================================== */
+
+.garage-car-info button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 48px;
+  margin-top: auto;
+  padding: 13px 16px;
+
+  color: #ff6576;
+  background: rgba(237, 49, 71, 0.045);
+
+  border: 1px solid rgba(237, 49, 71, 0.55);
+  border-radius: 10px;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  transition:
+    background 250ms ease,
+    border-color 250ms ease,
+    color 250ms ease,
+    transform 250ms ease;
+}
+
+.garage-car-info button:hover {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   GARAGEM VAZIA
+   ========================================== */
+
+.garage-empty {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 360px;
+  padding: 70px 24px;
+
+  text-align: center;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(237, 49, 71, 0.075),
+      transparent 65%
+    ),
+    linear-gradient(145deg, #191a21, #101116);
+
+  border: 1px dashed rgba(237, 49, 71, 0.3);
+  border-radius: var(--radius-lg);
+}
+
+.garage-empty > div {
+  margin-bottom: 22px;
+  font-size: 68px;
+  line-height: 1.2;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+}
+
+.garage-empty h3 {
+  margin-bottom: 12px;
+  color: #fff;
+  font-size: 27px;
+  font-weight: 850;
+}
+
+.garage-empty p {
+  max-width: 380px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+/* ==========================================
+   TABLETS
+   ========================================== */
+
+@media (max-width: 1080px) {
+  .garage-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 21px;
+  }
+
+  .garage-settings {
+    padding: 27px;
+  }
+}
+
+/* ==========================================
+   CELULARES
+   ========================================== */
+
+@media (max-width: 650px) {
+  .my-garage {
+    padding: 48px 0 70px;
+  }
+
+  .garage-heading h2 {
+    font-size: clamp(34px, 9vw, 52px);
+  }
+
+  .garage-heading p {
+    font-size: 13px;
+  }
+
+  .garage-settings {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+    padding: 23px 20px;
+    margin-top: 27px;
+  }
+
+  .garage-settings select {
+    width: 100%;
+  }
+
+  .garage-indicators {
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .garage-indicators > div {
+    min-width: 0;
+    flex: 1;
+    padding: 0;
+  }
+
+  .garage-indicators > div + div {
+    padding-left: 17px;
+  }
+
+  .garage-indicators strong {
+    font-size: 34px;
+  }
+
+  .garage-indicators span {
+    font-size: 11px;
+  }
+
+  .garage-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .garage-car-info {
+    padding: 22px;
+  }
+
+  .garage-car-info h3 {
+    font-size: 22px;
+  }
+
+  .garage-empty {
+    min-height: 300px;
+    padding: 55px 18px;
+  }
+
+  .garage-empty > div {
+    font-size: 56px;
+  }
+
+  .garage-empty h3 {
+    font-size: 23px;
+  }
+}
+
+/* ==========================================
+   ACESSIBILIDADE
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .my-garage {
+    animation: none;
+  }
+
+  .garage-car,
+  .garage-car-photo img,
+  .garage-progress > div,
+  .garage-car-info button {
+    transition: none;
+  }
+
+  .garage-car:hover,
+  .garage-car:hover .garage-car-photo img {
+    transform: none;
+  }
+}

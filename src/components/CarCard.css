@@ -1,0 +1,551 @@
+
+/* ==========================================
+   GARAGEM Z — CAR CARD
+   PREMIUM SUPERCAR SHOWROOM
+   ========================================== */
+
+/* ==========================================
+   ESTRUTURA DO CARD
+   ========================================== */
+
+.car-card {
+  position: relative;
+  isolation: isolate;
+
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+  height: 100%;
+
+  background: linear-gradient(
+    160deg,
+    #1b1c24 0%,
+    #14151b 65%,
+    #111218 100%
+  );
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+
+  overflow: hidden;
+
+  box-shadow: var(--shadow-card);
+
+  transition:
+    transform 350ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 300ms ease,
+    box-shadow 350ms ease;
+}
+
+/* Linha de destaque superior */
+
+.car-card::before {
+  content: "";
+  position: absolute;
+  z-index: 4;
+
+  top: 0;
+  left: 18%;
+  right: 18%;
+  height: 2px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent),
+    transparent
+  );
+
+  opacity: 0;
+
+  transition: opacity 300ms ease;
+  pointer-events: none;
+}
+
+/* Efeito ao passar o mouse */
+
+.car-card:hover {
+  transform: translateY(-8px);
+
+  border-color: rgba(237, 49, 71, 0.48);
+
+  box-shadow:
+    0 25px 55px rgba(0, 0, 0, 0.48),
+    0 0 35px rgba(237, 49, 71, 0.07);
+}
+
+.car-card:hover::before {
+  opacity: 1;
+}
+
+/* ==========================================
+   ÁREA DA FOTOGRAFIA
+   ========================================== */
+
+.car-image {
+  position: relative;
+  isolation: isolate;
+
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+
+  background: #22232b;
+  overflow: hidden;
+}
+
+/* Foto principal */
+
+.car-image > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  transition:
+    transform 650ms cubic-bezier(0.2, 0.75, 0.2, 1),
+    filter 400ms ease;
+}
+
+.car-card:hover .car-image > img {
+  transform: scale(1.065);
+  filter: brightness(1.06) saturate(1.07);
+}
+
+/* Sombreamento cinematográfico */
+
+.car-image::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+
+  inset: 0;
+
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.17) 0%,
+    transparent 40%,
+    rgba(0, 0, 0, 0.24) 100%
+  );
+
+  pointer-events: none;
+}
+
+/* ==========================================
+   PLACEHOLDER
+   ========================================== */
+
+.car-placeholder {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  color: var(--text-muted);
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(237, 49, 71, 0.08),
+      transparent 65%
+    ),
+    linear-gradient(
+      135deg,
+      #24252e,
+      #17181e
+    );
+}
+
+.car-placeholder span {
+  font-size: clamp(45px, 5vw, 65px);
+  line-height: 1;
+
+  filter: grayscale(0.3);
+
+  transition: transform 350ms ease;
+}
+
+.car-card:hover .car-placeholder span {
+  transform: translateY(-4px) scale(1.05);
+}
+
+.car-placeholder p {
+  color: #858793;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* ==========================================
+   ANO DO VEÍCULO
+   ========================================== */
+
+.car-year {
+  position: absolute;
+  z-index: 5;
+
+  top: 15px;
+  right: 15px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 31px;
+  padding: 6px 12px;
+
+  color: white;
+
+  background: linear-gradient(
+    135deg,
+    #ff4a5f,
+    #cc223c
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.24);
+
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.25px;
+}
+
+/* ==========================================
+   BOTÃO EDITAR FOTO
+   ========================================== */
+
+.edit-car-image {
+  position: absolute;
+  z-index: 5;
+
+  top: 15px;
+  left: 15px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  min-height: 31px;
+  padding: 7px 12px;
+
+  color: #fff;
+  background: rgba(10, 11, 16, 0.78);
+
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 8px;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  font-size: 11px;
+  font-weight: 750;
+
+  transition:
+    background 200ms ease,
+    border-color 200ms ease,
+    transform 200ms ease;
+}
+
+.edit-car-image:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   FONTE DA FOTOGRAFIA
+   ========================================== */
+
+.car-photo-source {
+  position: absolute;
+  z-index: 5;
+
+  bottom: 13px;
+  right: 13px;
+
+  display: inline-flex;
+  align-items: center;
+
+  padding: 6px 10px;
+
+  color: #f1f1f5;
+
+  background: rgba(9, 10, 15, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 7px;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  font-size: 10px;
+  font-weight: 650;
+
+  transition:
+    background 200ms ease,
+    transform 200ms ease;
+}
+
+.car-photo-source:hover {
+  color: #fff;
+  background: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   CONTEÚDO DO CARD
+   ========================================== */
+
+.car-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  padding: 24px;
+}
+
+/* FABRICANTE */
+
+.car-brand {
+  display: inline-block;
+
+  margin-bottom: 8px;
+
+  color: var(--accent);
+
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 2.3px;
+  text-transform: uppercase;
+}
+
+/* MODELO */
+
+.car-content h3 {
+  min-height: 52px;
+  margin: 0 0 22px;
+
+  color: #fff;
+
+  font-size: clamp(19px, 1.8vw, 23px);
+  font-weight: 850;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================
+   ESPECIFICAÇÕES
+   ========================================== */
+
+.car-specs {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+
+  margin-bottom: 24px;
+}
+
+.car-specs > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+
+  min-height: 45px;
+  padding: 12px 0;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+.car-specs > div:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+/* Rótulo */
+
+.car-specs span {
+  color: var(--text-secondary);
+
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Valor */
+
+.car-specs strong {
+  color: #f4f4f7;
+
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.4;
+
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================
+   BOTÃO ADICIONAR À GARAGEM
+   ========================================== */
+
+.add-car-btn {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 48px;
+
+  margin-top: auto;
+  padding: 13px 16px;
+
+  color: #fff;
+
+  background: linear-gradient(
+    135deg,
+    var(--accent),
+    #c3223a
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 10px;
+
+  font-size: 13px;
+  font-weight: 850;
+  letter-spacing: 0.1px;
+
+  box-shadow: 0 6px 22px rgba(237, 49, 71, 0.12);
+
+  transition:
+    transform 250ms ease,
+    box-shadow 250ms ease,
+    filter 250ms ease,
+    background 250ms ease;
+}
+
+.add-car-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+
+  filter: brightness(1.12);
+
+  box-shadow:
+    0 10px 28px rgba(237, 49, 71, 0.3);
+}
+
+.add-car-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* VEÍCULO JÁ ADICIONADO */
+
+.add-car-btn.added {
+  color: #a8f3ce;
+
+  background: linear-gradient(
+    135deg,
+    #24503f,
+    #18372d
+  );
+
+  border-color: rgba(94, 210, 150, 0.22);
+  box-shadow: none;
+
+  opacity: 1;
+  cursor: default;
+}
+
+.add-car-btn.added:hover {
+  transform: none;
+  filter: none;
+}
+
+/* ==========================================
+   TABLETS
+   ========================================== */
+
+@media (max-width: 1100px) {
+  .car-content {
+    padding: 20px;
+  }
+
+  .car-content h3 {
+    font-size: 20px;
+  }
+
+  .car-specs > div {
+    min-height: 43px;
+  }
+}
+
+/* ==========================================
+   MOBILE
+   ========================================== */
+
+@media (max-width: 650px) {
+  .car-card {
+    border-radius: 17px;
+  }
+
+  .car-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .car-image {
+    aspect-ratio: 16 / 10;
+  }
+
+  .car-content {
+    padding: 22px;
+  }
+
+  .car-content h3 {
+    min-height: auto;
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+
+  .car-brand {
+    font-size: 10px;
+  }
+
+  .car-specs span,
+  .car-specs strong {
+    font-size: 12px;
+  }
+
+  .add-car-btn {
+    min-height: 50px;
+    font-size: 13px;
+  }
+}
+
+/* ==========================================
+   REDUZIR MOVIMENTO
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .car-card,
+  .car-image > img,
+  .add-car-btn,
+  .edit-car-image,
+  .car-photo-source {
+    transition: none;
+  }
+
+  .car-card:hover,
+  .car-card:hover .car-image > img {
+    transform: none;
+  }
+}
