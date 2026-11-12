@@ -3,9 +3,9 @@ import approvedImages from "../data/approvedImages.json";
 
 const API_URL = "https://commons.wikimedia.org/w/api.php";
 
-const CACHE_PREFIX = "garage_z_image_v6_";
+const CACHE_PREFIX = "garage_z_image_v7_";
 const CHOICE_PREFIX = "garage_z_choice_v1_";
-const FAILED_PREFIX = "garage_z_failed_v1_";
+const FAILED_PREFIX = "garage_z_failed_v2_";
 
 const pendingRequests = new Map();
 
@@ -15,6 +15,7 @@ const pendingRequests = new Map();
 
 function readStorage(key) {
   try {
+    if (typeof localStorage === "undefined") return null;
     return localStorage.getItem(key);
   } catch {
     return null;
@@ -23,6 +24,7 @@ function readStorage(key) {
 
 function writeStorage(key, value) {
   try {
+    if (typeof localStorage === "undefined") return false;
     localStorage.setItem(key, value);
     return true;
   } catch {
@@ -32,7 +34,9 @@ function writeStorage(key, value) {
 
 function removeStorage(key) {
   try {
-    localStorage.removeItem(key);
+    if (typeof localStorage !== "undefined") {
+      localStorage.removeItem(key);
+    }
   } catch {
     // Armazenamento indisponível.
   }
@@ -68,7 +72,7 @@ function normalize(value) {
 }
 
 /* =========================================
-   VALIDAÇÃO
+   VALIDAÇÃO DE URL
 ========================================= */
 
 function isValidImageUrl(url) {
@@ -76,8 +80,20 @@ function isValidImageUrl(url) {
     return false;
   }
 
+  const value = url.trim();
+
+  // Imagens locais da pasta public.
+  if (
+    value.startsWith("/cars/") &&
+    !value.includes("..") &&
+    /^\/cars\/[a-z0-9._-]+\.(jpg|jpeg|png|webp)$/i.test(value)
+  ) {
+    return true;
+  }
+
+  // Imagens externas HTTPS.
   try {
-    const parsed = new URL(url);
+    const parsed = new URL(value);
 
     return (
       parsed.protocol === "https:" &&
@@ -90,6 +106,10 @@ function isValidImageUrl(url) {
 
 function isValidImage(image) {
   return Boolean(image && isValidImageUrl(image.url));
+}
+
+function isLocalImage(image) {
+  return Boolean(image?.url?.startsWith("/cars/"));
 }
 
 /* =========================================
@@ -107,7 +127,7 @@ export function getApprovedCarImage(car) {
   return {
     ...approved,
     source: approved.source || null,
-    title: approved.title || car.name,
+    title: approved.title || `${car.brand} ${car.name}`,
     license: approved.license || "Verificar licença"
   };
 }
@@ -228,8 +248,6 @@ function scoreImage(image, car) {
     return -100;
   }
 
-  // Exige correspondência mais forte para evitar
-  // trocar uma versão especial por uma versão comum.
   const matchRatio =
     matchedModelWords / Math.max(modelWords.length, 1);
 
@@ -388,16 +406,25 @@ export function clearSelectedCarImage(car) {
 ========================================= */
 
 export async function getCarImage(car) {
-  // 1. Escolha manual
+  // 1. Prioridade máxima: imagem local aprovada.
+  const approved = getApprovedCarImage(car);
+
+  if (
+    approved &&
+    isLocalImage(approved) &&
+    !isFailedImage(car, approved)
+  ) {
+    return approved;
+  }
+
+  // 2. Escolha manual, quando não há imagem local.
   const selected = getSelectedCarImage(car);
 
   if (selected) {
     return selected;
   }
 
-  // 2. Imagem aprovada
-  const approved = getApprovedCarImage(car);
-
+  // 3. Imagem aprovada externa.
   if (
     approved &&
     !isFailedImage(car, approved)
@@ -405,12 +432,12 @@ export async function getCarImage(car) {
     return approved;
   }
 
-  // 3. Imagem cadastrada diretamente
+  // 4. Imagem cadastrada diretamente no carro.
   if (isValidImageUrl(car.image)) {
     const direct = {
       url: car.image,
       source: null,
-      title: car.name,
+      title: `${car.brand} ${car.name}`,
       license: "Verificar licença"
     };
 
@@ -419,7 +446,7 @@ export async function getCarImage(car) {
     }
   }
 
-  // 4. Cache automático
+  // 5. Cache automático.
   const key = cacheKey(car);
 
   try {
@@ -441,12 +468,12 @@ export async function getCarImage(car) {
     removeStorage(key);
   }
 
-  // 5. Evita buscas duplicadas
+  // 6. Evita buscas duplicadas.
   if (pendingRequests.has(key)) {
     return pendingRequests.get(key);
   }
 
-  // 6. Busca automática
+  // 7. Busca automática somente como fallback.
   const request = searchCarImages(car)
     .then((images) => {
       const image = images[0] || null;

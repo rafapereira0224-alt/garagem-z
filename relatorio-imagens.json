@@ -1,0 +1,358 @@
+{
+  "data": "2026-11-12T01:28:44.891Z",
+  "total": 50,
+  "acessiveis": 9,
+  "falhas": 41,
+  "resultados": [
+    {
+      "nome": "Porsche | Carrera GT",
+      "status": "OK",
+      "codigo": 200,
+      "motivo": "Imagem acessível",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Porsche_Carrera_GT_%2851952018221%29.jpg/960px-Porsche_Carrera_GT_%2851952018221%29.jpg"
+    },
+    {
+      "nome": "Porsche | 911 GT3 RS 4.0",
+      "status": "INVALIDA",
+      "codigo": 404,
+      "motivo": "HTTP 404",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Porsche_997_GT3_RS_4.0_IMG_4116.jpg/960px-Porsche_997_GT3_RS_4.0_IMG_4116.jpg"
+    },
+    {
+      "nome": "Porsche | 911 GT2 RS (997)",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Porsche_911_GT2_RS_%28997%29_-_22469153635.jpg/960px-Porsche_911_GT2_RS_%28997%29_-_22469153635.jpg"
+    },
+    {
+      "nome": "Porsche | 911 GT3 RS (996)",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/2003_Porsche_911_996_GT3_RS_%2836663414422%29.jpg/960px-2003_Porsche_911_996_GT3_RS_%2836663414422%29.jpg"
+    },
+    {
+      "nome": "Porsche | 911 Turbo (997)",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Porsche_911_997_Turbo_Cabriolet.jpg/960px-Porsche_911_997_Turbo_Cabriolet.jpg"
+    },
+    {
+      "nome": "Porsche | Cayenne Turbo S",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Porsche_Cayenne_Turbo_%28957%29_front_20090327.jpg/960px-Porsche_Cayenne_Turbo_%28957%29_front_20090327.jpg"
+    },
+    {
+      "nome": "Porsche | Panamera Turbo",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Porsche_Panamera_Turbo_%28970%29_%E2%80%93_Frontansicht_%281%29%2C_18._Juli_2012%2C_D%C3%BCsseldorf.jpg/960px-Porsche_Panamera_Turbo_%28970%29_%E2%80%93_Frontansicht_%281%29%2C_18._Juli_2012%2C_D%C3%BCsseldorf.jpg"
+    },
+    {
+      "nome": "Ferrari | Enzo",
+      "status": "OK",
+      "codigo": 200,
+      "motivo": "Imagem acessível",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/82/SC06_2003_Enzo_Ferrari_2.jpg"
+    },
+    {
+      "nome": "Ferrari | 458 Italia",
+      "status": "OK",
+      "codigo": 200,
+      "motivo": "Imagem acessível",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/2012_Ferrari_458_Italia_red_car.jpg/960px-2012_Ferrari_458_Italia_red_car.jpg"
+    },
+    {
+      "nome": "Ferrari | 599 GTO",
+      "status": "OK",
+      "codigo": 200,
+      "motivo": "Imagem acessível",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/2011_Ferrari_599_GTO_%2832648246453%29.jpg/960px-2011_Ferrari_599_GTO_%2832648246453%29.jpg"
+    },
+    {
+      "nome": "Ferrari | F430 Scuderia",
+      "status": "INVALIDA",
+      "codigo": 404,
+      "motivo": "HTTP 404",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Ferrari_F430_Scuderia_-_Flickr_-_Alexandre_Pr%C3%A9vot.jpg/960px-Ferrari_F430_Scuderia_-_Flickr_-_Alexandre_Pr%C3%A9vot.jpg"
+    },
+    {
+      "nome": "Ferrari | 360 Challenge Stradale",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Ferrari_360_Challenge_Stradale_%2815499346719%29.jpg/960px-Ferrari_360_Challenge_Stradale_%2815499346719%29.jpg"
+    },
+    {
+      "nome": "Ferrari | F12berlinetta",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Red_Ferrari_F12berlinetta_at_NAIAS_2013.jpg/960px-Red_Ferrari_F12berlinetta_at_NAIAS_2013.jpg"
+    },
+    {
+      "nome": "Lamborghini | Murciélago LP670-4 SV",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Lamborghini_Murcielago_LP670-4_SV_Genf_2009.jpg/960px-Lamborghini_Murcielago_LP670-4_SV_Genf_2009.jpg"
+    },
+    {
+      "nome": "Lamborghini | Aventador LP700-4",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Lamborghini_Aventador_LP700-4_%288688881317%29.jpg/960px-Lamborghini_Aventador_LP700-4_%288688881317%29.jpg"
+    },
+    {
+      "nome": "Lamborghini | Reventón",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/2008_Lamborghini_Reventon_SCD24.jpg/960px-2008_Lamborghini_Reventon_SCD24.jpg"
+    },
+    {
+      "nome": "Lamborghini | Gallardo Superleggera",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Lamborghini_Gallardo_Superleggera_BCN2009.jpg/960px-Lamborghini_Gallardo_Superleggera_BCN2009.jpg"
+    },
+    {
+      "nome": "Lamborghini | Diablo GT",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/12-10-25-autostadt-wolfsburg-by-RalfR-31.jpg/960px-12-10-25-autostadt-wolfsburg-by-RalfR-31.jpg"
+    },
+    {
+      "nome": "Bugatti | Veyron 16.4",
+      "status": "OK",
+      "codigo": 200,
+      "motivo": "Imagem acessível",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Bugatti_Veyron_16.4_White_Blue_GT_%286200946904%29.jpg/960px-Bugatti_Veyron_16.4_White_Blue_GT_%286200946904%29.jpg"
+    },
+    {
+      "nome": "Bugatti | Veyron Super Sport",
+      "status": "INVALIDA",
+      "codigo": 404,
+      "motivo": "HTTP 404",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Bugatti_Veyron_Super_Sport_at_Top_Marques_2011.jpg/960px-Bugatti_Veyron_Super_Sport_at_Top_Marques_2011.jpg"
+    },
+    {
+      "nome": "Pagani | Zonda F",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Pagani_Zonda_F_Clubsport_-_Flickr_-_Alexandre_Pr%C3%A9vot.jpg/960px-Pagani_Zonda_F_Clubsport_-_Flickr_-_Alexandre_Pr%C3%A9vot.jpg"
+    },
+    {
+      "nome": "Pagani | Zonda Cinque",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Pagani_Zonda_Cinque_Roadster_01.jpg/960px-Pagani_Zonda_Cinque_Roadster_01.jpg"
+    },
+    {
+      "nome": "Pagani | Huayra",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Pagani_Huayra_at_Geneva_Motor_Show_2012_%28orange_carbon%29.jpg/960px-Pagani_Huayra_at_Geneva_Motor_Show_2012_%28orange_carbon%29.jpg"
+    },
+    {
+      "nome": "Koenigsegg | CCX",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Koenigsegg_CCX_-_Flickr_-_Alexandre_Pr%C3%A9vot.jpg/960px-Koenigsegg_CCX_-_Flickr_-_Alexandre_Pr%C3%A9vot.jpg"
+    },
+    {
+      "nome": "Koenigsegg | CCXR",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/2008_Koenigsegg_CCXR_Edition.jpg/960px-2008_Koenigsegg_CCXR_Edition.jpg"
+    },
+    {
+      "nome": "Koenigsegg | Agera R",
+      "status": "INVALIDA",
+      "codigo": 404,
+      "motivo": "HTTP 404",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Koenigsegg_Agera_R_Genf_2011.jpg/960px-Koenigsegg_Agera_R_Genf_2011.jpg"
+    },
+    {
+      "nome": "Mercedes-Benz | SLR McLaren 722 Edition",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Mercedes-Benz_SLR_McLaren_722_Edition_front.jpg/960px-Mercedes-Benz_SLR_McLaren_722_Edition_front.jpg"
+    },
+    {
+      "nome": "Mercedes-Benz | SLS AMG",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Mercedes-Benz_SLS_AMG_%28C197%29_front_20100430.jpg/960px-Mercedes-Benz_SLS_AMG_%28C197%29_front_20100430.jpg"
+    },
+    {
+      "nome": "Mercedes-Benz | CLK GTR",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Mercedes-Benz_CLK_GTR_Roadster.jpg/960px-Mercedes-Benz_CLK_GTR_Roadster.jpg"
+    },
+    {
+      "nome": "Mercedes-Benz | C63 AMG (W204)",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Mercedes-Benz_C63_AMG_Sedan_%28W204%29_front.JPG/960px-Mercedes-Benz_C63_AMG_Sedan_%28W204%29_front.JPG"
+    },
+    {
+      "nome": "Mercedes-Benz | E63 AMG (W212)",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Mercedes-Benz_E63_AMG_%28W212%29_front.jpg/960px-Mercedes-Benz_E63_AMG_%28W212%29_front.jpg"
+    },
+    {
+      "nome": "Mercedes-Benz | ML63 AMG",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Mercedes-Benz_ML_63_AMG_W164_front.JPG/960px-Mercedes-Benz_ML_63_AMG_W164_front.JPG"
+    },
+    {
+      "nome": "BMW | M3 CSL (E46)",
+      "status": "OK",
+      "codigo": 200,
+      "motivo": "Imagem acessível",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/2003_BMW_M3_CSL_front_%2830.7.2022%29.jpg/960px-2003_BMW_M3_CSL_front_%2830.7.2022%29.jpg"
+    },
+    {
+      "nome": "BMW | M3 GTS (E92)",
+      "status": "OK",
+      "codigo": 200,
+      "motivo": "Imagem acessível",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/BMW_M3_GTS_-_Flickr_-_Alexandre_Pr%C3%A9vot_%286%29.jpg/960px-BMW_M3_GTS_-_Flickr_-_Alexandre_Pr%C3%A9vot_%286%29.jpg"
+    },
+    {
+      "nome": "BMW | M5 (E60)",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/BMW_E60_M5_1.JPG/960px-BMW_E60_M5_1.JPG"
+    },
+    {
+      "nome": "BMW | X5 M (E70)",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/BMW_X5_M_%28E70%29_front_20100723.jpg/960px-BMW_X5_M_%28E70%29_front_20100723.jpg"
+    },
+    {
+      "nome": "Audi | R8 V10",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Audi_R8_Coup%C3%A9_5.2_FSI_quattro_%282014%29_%2852455250912%29.jpg/960px-Audi_R8_Coup%C3%A9_5.2_FSI_quattro_%282014%29_%2852455250912%29.jpg"
+    },
+    {
+      "nome": "Audi | R8 GT",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Audi_R8_GT_%28white%29.jpg/960px-Audi_R8_GT_%28white%29.jpg"
+    },
+    {
+      "nome": "Audi | RS6 Avant (C6)",
+      "status": "OK",
+      "codigo": 200,
+      "motivo": "Imagem acessível",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Audi_RS6_Avant_%28C6%29_front.JPG/960px-Audi_RS6_Avant_%28C6%29_front.JPG"
+    },
+    {
+      "nome": "Audi | RS4 (B7)",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Audi-RS4.jpg"
+    },
+    {
+      "nome": "Nissan | Skyline GT-R R34",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/NISSAN_R34-Skyline_GTR.jpg/960px-NISSAN_R34-Skyline_GTR.jpg"
+    },
+    {
+      "nome": "Nissan | GT-R R35",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Nissan_GT-R_front_20080312.jpg/960px-Nissan_GT-R_front_20080312.jpg"
+    },
+    {
+      "nome": "Lexus | LFA",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/2012_Lexus_LFA_SCD26.jpg/960px-2012_Lexus_LFA_SCD26.jpg"
+    },
+    {
+      "nome": "Ford | GT",
+      "status": "INVALIDA",
+      "codigo": 404,
+      "motivo": "HTTP 404",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/2005_Ford_GT_in_Blue.jpg/960px-2005_Ford_GT_in_Blue.jpg"
+    },
+    {
+      "nome": "Chevrolet | Corvette ZR1 (C6)",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Chevrolet_Corvette_C6_ZR1_%2853214550742%29.jpg/960px-Chevrolet_Corvette_C6_ZR1_%2853214550742%29.jpg"
+    },
+    {
+      "nome": "Dodge | Viper SRT-10 ACR",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Dodge_Viper_SRT10_ACR_red.jpg/960px-Dodge_Viper_SRT10_ACR_red.jpg"
+    },
+    {
+      "nome": "Aston Martin | One-77",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/2012_Aston_Martin_One-77_coupe_%282012-10-26%29_01.jpg/960px-2012_Aston_Martin_One-77_coupe_%282012-10-26%29_01.jpg"
+    },
+    {
+      "nome": "Bentley | Continental Supersports",
+      "status": "OK",
+      "codigo": 200,
+      "motivo": "Imagem acessível",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/2017_Bentley_Continental_Supersports_in_Extreme_Silver%2C_front_right.jpg/960px-2017_Bentley_Continental_Supersports_in_Extreme_Silver%2C_front_right.jpg"
+    },
+    {
+      "nome": "Jeep | Grand Cherokee SRT8",
+      "status": "INVALIDA",
+      "codigo": 429,
+      "motivo": "HTTP 429",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Jeep_Grand_Cherokee_SRT8_%E2%80%93_Frontansicht%2C_1._Novembro_2012%2C_Lisboa.jpg/960px-Jeep_Grand_Cherokee_SRT8_%E2%80%93_Frontansicht%2C_1._Novembro_2012%2C_Lisboa.jpg"
+    },
+    {
+      "nome": "Cadillac | CTS-V",
+      "status": "INVALIDA",
+      "codigo": 404,
+      "motivo": "HTTP 404",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/2009_Cadillac_CTS-V_sedan_--_07-11-2009.jpg/960px-2009_Cadillac_CTS-V_sedan_--_07-11-2009.jpg"
+    }
+  ]
+}
