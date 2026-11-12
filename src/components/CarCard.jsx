@@ -1,9 +1,13 @@
-import { useEffect, useState } from "react";
+
+import { useEffect, useRef, useState } from "react";
 
 import {
   getCarImage,
   saveSelectedCarImage,
   getSelectedCarImage,
+  reportCarImageError,
+  clearCarImageErrors,
+  clearSelectedCarImage,
 } from "../services/carImages";
 
 import ImagePicker from "./ImagePicker";
@@ -77,15 +81,21 @@ function SpeedIcon() {
 ========================================== */
 
 function CarCard({ car, onAdd, isAdded }) {
-  const [imageData, setImageData] = useState(() => getSelectedCarImage(car));
+  const [imageData, setImageData] = useState(
+    () => getSelectedCarImage(car)
+  );
 
   const [loading, setLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
   const [pickerOpen, setPickerOpen] = useState(false);
-
   const [imageVersion, setImageVersion] = useState(0);
 
-  /* CARREGAR IMAGEM */
+  const failedAttempts = useRef(0);
+  const lastFailedUrl = useRef(null);
+
+  /* ==========================================
+     CARREGAR IMAGEM
+  ========================================== */
 
   useEffect(() => {
     let active = true;
@@ -94,20 +104,26 @@ function CarCard({ car, onAdd, isAdded }) {
     setImageError(false);
 
     const savedImage = getSelectedCarImage(car);
-    setImageData(savedImage);
+
+    setImageData(savedImage || null);
 
     getCarImage(car)
       .then((result) => {
         if (!active) return;
 
         setImageData(result);
+        setImageError(!result);
       })
       .catch((error) => {
         if (!active) return;
 
-        console.error(`Erro ao carregar ${car.brand} ${car.name}:`, error);
+        console.error(
+          `Erro ao carregar ${car.brand} ${car.name}:`,
+          error
+        );
 
         setImageData(null);
+        setImageError(true);
       })
       .finally(() => {
         if (active) {
@@ -120,11 +136,76 @@ function CarCard({ car, onAdd, isAdded }) {
     };
   }, [car, imageVersion]);
 
-  /* ESCOLHER UMA FOTO */
+  /* ==========================================
+     ERRO AO CARREGAR FOTO
+  ========================================== */
+
+  function handleImageError() {
+    const failedImage = imageData;
+
+    if (!failedImage?.url) {
+      setImageError(true);
+      return;
+    }
+
+    if (lastFailedUrl.current === failedImage.url) {
+      return;
+    }
+
+    lastFailedUrl.current = failedImage.url;
+
+    console.warn(
+      `Imagem inválida: ${car.brand} ${car.name}`,
+      failedImage.url
+    );
+
+    reportCarImageError(car, failedImage);
+
+    failedAttempts.current += 1;
+
+    setImageData(null);
+
+    if (failedAttempts.current >= 5) {
+      setImageError(true);
+      setLoading(false);
+      return;
+    }
+
+    setImageError(false);
+    setLoading(true);
+
+    // Reconsulta o serviço, que agora ignora
+    // a URL registrada como quebrada.
+    setImageVersion((previous) => previous + 1);
+  }
+
+  /* ==========================================
+     TENTAR NOVAMENTE
+  ========================================== */
+
+  function retryImage() {
+    failedAttempts.current = 0;
+    lastFailedUrl.current = null;
+
+    clearCarImageErrors(car);
+
+    setImageData(null);
+    setImageError(false);
+    setLoading(true);
+
+    setImageVersion((previous) => previous + 1);
+  }
+
+  /* ==========================================
+     ESCOLHER UMA FOTO
+  ========================================== */
 
   function selectImage(image) {
     try {
       saveSelectedCarImage(car, image);
+
+      failedAttempts.current = 0;
+      lastFailedUrl.current = null;
 
       setImageData(image);
       setImageError(false);
@@ -135,23 +216,38 @@ function CarCard({ car, onAdd, isAdded }) {
 
       alert(
         "Não foi possível salvar essa imagem. " +
-          "Verifique o armazenamento do navegador.",
+        "Verifique o armazenamento do navegador."
       );
     }
   }
 
-  /* RESTAURAR FOTO AUTOMÁTICA */
+  /* ==========================================
+     RESTAURAR FOTO AUTOMÁTICA
+  ========================================== */
 
   function resetImage() {
+    clearSelectedCarImage(car);
+
+    failedAttempts.current = 0;
+    lastFailedUrl.current = null;
+
     setPickerOpen(false);
+    setImageData(null);
+    setImageError(false);
+    setLoading(true);
+
     setImageVersion((previous) => previous + 1);
   }
 
-  /* DADOS DO VEÍCULO */
+  /* ==========================================
+     DADOS DO VEÍCULO
+  ========================================== */
 
   const fullName = `${car.brand} ${car.name}`;
 
-  const hasImage = Boolean(imageData?.url && !imageError);
+  const hasImage = Boolean(
+    imageData?.url && !imageError
+  );
 
   const specifications = [
     {
@@ -171,49 +267,65 @@ function CarCard({ car, onAdd, isAdded }) {
     },
   ];
 
-  /* RENDERIZAÇÃO */
+  /* ==========================================
+     RENDERIZAÇÃO
+  ========================================== */
 
   return (
     <>
-      <article className={`car-card ${isAdded ? "car-card-selected" : ""}`}>
+      <article
+        className={`car-card ${
+          isAdded ? "car-card-selected" : ""
+        }`}
+      >
         {/* FOTO DO CARRO */}
 
         <div className="car-image">
           {hasImage ? (
             <img
+              key={imageData.url}
               src={imageData.url}
               alt={fullName}
               loading="lazy"
               decoding="async"
-              onError={() => setImageError(true)}
+              onError={handleImageError}
             />
           ) : (
-            <div className="car-placeholder" role="status">
-              <span aria-hidden="true">🏎️</span>
+            <div
+              className={`car-placeholder ${
+                imageError ? "car-placeholder-error" : ""
+              }`}
+              role="status"
+            >
+              <span aria-hidden="true">
+                {loading ? "🏎️" : "🚘"}
+              </span>
 
               <p>
-                {loading ? "Carregando fotografia..." : "Imagem indisponível"}
+                {loading
+                  ? "Carregando fotografia..."
+                  : imageError
+                  ? "Erro ao carregar fotografia"
+                  : "Imagem indisponível"}
               </p>
+
+              {!loading && (
+                <button
+                  type="button"
+                  className="retry-car-image"
+                  onClick={retryImage}
+                >
+                  Tentar novamente
+                </button>
+              )}
             </div>
           )}
 
           {/* ANO */}
 
-          <span className="car-year">{car.year}</span>
-
-          {/* EDITOR DE FOTOS */}
-
-          {import.meta.env.DEV && (
-            <button
-              type="button"
-              className="edit-car-image"
-              onClick={() => setPickerOpen(true)}
-              aria-label={`Editar fotografia de ${fullName}`}
-              title="Escolher outra fotografia"
-            >
-              ✎ Editar foto
-            </button>
-          )}
+          <span className="car-year">
+            {car.year}
+          </span>
 
           {/* CRÉDITOS DA IMAGEM */}
 
@@ -246,7 +358,10 @@ function CarCard({ car, onAdd, isAdded }) {
               marginBottom: "8px",
             }}
           >
-            <span className="car-brand" style={{ marginBottom: 0 }}>
+            <span
+              className="car-brand"
+              style={{ marginBottom: 0 }}
+            >
               {car.brand}
             </span>
 
@@ -301,7 +416,9 @@ function CarCard({ car, onAdd, isAdded }) {
 
           <button
             type="button"
-            className={`add-car-btn ${isAdded ? "added" : ""}`}
+            className={`add-car-btn ${
+              isAdded ? "added" : ""
+            }`}
             onClick={() => onAdd(car)}
             disabled={isAdded}
             aria-label={
@@ -310,7 +427,9 @@ function CarCard({ car, onAdd, isAdded }) {
                 : `Adicionar ${fullName} à garagem`
             }
           >
-            {isAdded ? "✓ Na minha garagem" : "+ Adicionar à garagem"}
+            {isAdded
+              ? "✓ Na minha garagem"
+              : "+ Adicionar à garagem"}
           </button>
         </div>
       </article>

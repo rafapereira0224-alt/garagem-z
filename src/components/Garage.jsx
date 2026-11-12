@@ -1,7 +1,18 @@
 
-import { useEffect, useState } from "react";
-import { getCarImage } from "../services/carImages";
+import { useEffect, useRef, useState } from "react";
+
+import {
+  getCarImage,
+  reportCarImageError,
+} from "../services/carImages";
+
 import "./Garage.css";
+
+/* ==========================================
+   CONFIGURAÇÕES
+========================================== */
+
+const MAX_IMAGE_ATTEMPTS = 5;
 
 /* ==========================================
    CARD DE UM CARRO DA GARAGEM
@@ -11,36 +22,123 @@ function GarageCar({ car, position, onRemove }) {
   const [image, setImage] = useState(null);
   const [imageError, setImageError] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [imageVersion, setImageVersion] = useState(0);
+
+  const attemptsRef = useRef(0);
+  const failedUrlsRef = useRef(new Set());
+
+  const fullName = `${car.brand} ${car.name}`;
+
+  /* ========================================
+     REINICIAR AO TROCAR DE CARRO
+  ======================================== */
+
+  useEffect(() => {
+    attemptsRef.current = 0;
+    failedUrlsRef.current.clear();
+    setImageVersion(0);
+    setImage(null);
+    setImageError(false);
+    setLoading(true);
+  }, [car.id]);
+
+  /* ========================================
+     CARREGAMENTO DA IMAGEM
+  ======================================== */
 
   useEffect(() => {
     let active = true;
 
-    setImage(null);
-    setImageError(false);
     setLoading(true);
 
     getCarImage(car)
       .then((result) => {
-        if (active) setImage(result);
+        if (!active) return;
+
+        if (!result?.url) {
+          setImage(null);
+          setImageError(true);
+          return;
+        }
+
+        if (failedUrlsRef.current.has(result.url)) {
+          setImage(null);
+          setImageError(true);
+          return;
+        }
+
+        setImage(result);
+        setImageError(false);
       })
       .catch((error) => {
-        if (active) {
-          console.error(
-            `Erro ao carregar ${car.brand} ${car.name}:`,
-            error
-          );
-        }
+        if (!active) return;
+
+        console.error(
+          `Erro ao carregar imagem de ${fullName}:`,
+          error
+        );
+
+        setImage(null);
+        setImageError(true);
       })
       .finally(() => {
-        if (active) setLoading(false);
+        if (active) {
+          setLoading(false);
+        }
       });
 
     return () => {
       active = false;
     };
-  }, [car]);
+  }, [car, imageVersion]);
 
-  const fullName = `${car.brand} ${car.name}`;
+  /* ========================================
+     RECUPERAÇÃO DE IMAGEM QUEBRADA
+  ======================================== */
+
+  function handleImageError() {
+    if (!image?.url) {
+      setImageError(true);
+      return;
+    }
+
+    const failedUrl = image.url;
+
+    if (failedUrlsRef.current.has(failedUrl)) {
+      setImage(null);
+      setImageError(true);
+      return;
+    }
+
+    failedUrlsRef.current.add(failedUrl);
+
+    try {
+      reportCarImageError(car, image);
+    } catch (error) {
+      console.error(
+        `Erro ao registrar imagem inválida de ${fullName}:`,
+        error
+      );
+    }
+
+    attemptsRef.current += 1;
+
+    setImage(null);
+
+    if (attemptsRef.current >= MAX_IMAGE_ATTEMPTS) {
+      setImageError(true);
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
+    setImageError(false);
+    setImageVersion((previous) => previous + 1);
+  }
+
+  /* ========================================
+     INTERFACE DO CARRO
+  ======================================== */
 
   return (
     <article className="garage-car">
@@ -49,11 +147,12 @@ function GarageCar({ car, position, onRemove }) {
       <div className="garage-car-photo">
         {image?.url && !imageError ? (
           <img
+            key={image.url}
             src={image.url}
             alt={fullName}
             loading="lazy"
             decoding="async"
-            onError={() => setImageError(true)}
+            onError={handleImageError}
           />
         ) : (
           <div
@@ -197,7 +296,7 @@ function GarageCar({ car, position, onRemove }) {
           ))}
         </div>
 
-        {/* CRÉDITOS */}
+        {/* CRÉDITOS DA FOTOGRAFIA */}
 
         {image?.source && !imageError && (
           <a
@@ -214,7 +313,7 @@ function GarageCar({ car, position, onRemove }) {
           </a>
         )}
 
-        {/* REMOVER */}
+        {/* REMOVER VEÍCULO */}
 
         <button
           type="button"
@@ -250,6 +349,10 @@ function Garage({
     ? 0
     : Math.min(100, (totalCars / capacity) * 100);
 
+  /* ========================================
+     ESTATÍSTICAS
+  ======================================== */
+
   const totalPower = garage.reduce(
     (total, car) => total + car.power,
     0
@@ -264,6 +367,10 @@ function Garage({
       !best || car.power > best.power ? car : best,
     null
   );
+
+  /* ========================================
+     INTERFACE
+  ======================================== */
 
   return (
     <section className="my-garage">
@@ -368,9 +475,7 @@ function Garage({
             },
             {
               title: "Potência combinada",
-              value: `${totalPower.toLocaleString(
-                "pt-BR"
-              )} cv`,
+              value: `${totalPower.toLocaleString("pt-BR")} cv`,
               detail: "Soma das potências",
             },
             {
@@ -483,7 +588,7 @@ function Garage({
             </span>
           </div>
 
-          {/* CARROS */}
+          {/* CARROS DA GARAGEM */}
 
           <div className="garage-grid">
             {garage.map((car, index) => (
